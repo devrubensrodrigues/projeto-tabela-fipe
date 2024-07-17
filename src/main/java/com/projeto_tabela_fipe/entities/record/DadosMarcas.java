@@ -1,9 +1,5 @@
 package com.projeto_tabela_fipe.entities.record;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+public record DadosMarcas(String codigo, String nome) {
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record DadosMarcas(@JsonAlias("codigo") String codigo,
-                          @JsonAlias("nome") String marca) {
 }

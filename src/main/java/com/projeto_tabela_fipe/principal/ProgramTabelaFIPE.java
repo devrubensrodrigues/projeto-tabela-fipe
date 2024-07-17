@@ -1,6 +1,5 @@
-package com.projeto_tabela_fipe;
+package com.projeto_tabela_fipe.principal;
 
-import com.projeto_tabela_fipe.entities.ProgramPrincipal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
