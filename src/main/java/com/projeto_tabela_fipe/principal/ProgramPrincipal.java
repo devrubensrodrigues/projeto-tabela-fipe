@@ -38,10 +38,14 @@ public class ProgramPrincipal {
         var codigo = sc.nextLine();
 
         json = consumoAPI.consultaAPI(URL_BASE + tipoVeiculo + "/marcas/" + codigo + "/modelos");
-        System.out.println(json);
 
         var tipos = converteDados.obterDados(json, DadosModelos.class);
 
         System.out.println(tipos);
+        System.out.println("\nModelos dessa marca: ");
+        tipos.modelos().stream()
+                .sorted(Comparator.comparing(DadosMarcas::nome))
+                .forEach(System.out::println);
+
     }
 }
