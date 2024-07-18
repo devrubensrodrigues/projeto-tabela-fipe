@@ -41,11 +41,31 @@ public class ProgramPrincipal {
 
         var tipos = converteDados.obterDados(json, DadosModelos.class);
 
-        System.out.println(tipos);
-        System.out.println("\nModelos dessa marca: ");
+        System.out.println("\nModelos dessa marca:\n");
         tipos.modelos().stream()
                 .sorted(Comparator.comparing(DadosMarcas::nome))
                 .forEach(System.out::println);
 
+        System.out.println("Digite o modelo de veículo que você procura:");
+        String modeloEscolhido = sc.nextLine();
+        tipos.modelos().stream()
+                        .filter(x -> x.nome().toLowerCase().contains(modeloEscolhido.toLowerCase()))
+                        .sorted(Comparator.comparing(DadosMarcas::nome))
+                        .forEach(System.out::println);
+
+        System.out.println("Digite o código do veículo escolhido: ");
+
+        String codigoDoModeloEscolhido = sc.nextLine();
+        json = consumoAPI.consultaAPI(URL_BASE + tipoVeiculo + "/marcas/" + codigo + "/modelos/"
+        + codigoDoModeloEscolhido + "/anos");
+
+        var anos = converteDados.obterLista(json, DadosMarcas.class);
+
+        System.out.println("\nAnos do modelo escolhido:\n");
+        anos.stream()
+            .sorted(Comparator.comparing(DadosMarcas::codigo).reversed())
+            .forEach(System.out::println);
+        
+        sc.close();
     }
 }
