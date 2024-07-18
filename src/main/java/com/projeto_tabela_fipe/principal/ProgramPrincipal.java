@@ -2,6 +2,7 @@ package com.projeto_tabela_fipe.principal;
 
 import com.projeto_tabela_fipe.entities.record.DadosMarcas;
 import com.projeto_tabela_fipe.entities.record.DadosModelos;
+import com.projeto_tabela_fipe.entities.record.Veiculo;
 import com.projeto_tabela_fipe.service.API;
 import com.projeto_tabela_fipe.service.ConverteDados;
 
@@ -65,7 +66,15 @@ public class ProgramPrincipal {
         anos.stream()
             .sorted(Comparator.comparing(DadosMarcas::codigo).reversed())
             .forEach(System.out::println);
-        
+
+        System.out.println("Digite o código do ano escolhido:");
+        String codigoAnoEscolhido = sc.nextLine();
+
+        json = consumoAPI.consultaAPI(URL_BASE + tipoVeiculo + "/marcas/" + codigo + "/modelos/"
+                + codigoDoModeloEscolhido + "/anos/" + codigoAnoEscolhido);
+
+        var veiculo = converteDados.obterDados(json, Veiculo.class);
+
         sc.close();
     }
 }
