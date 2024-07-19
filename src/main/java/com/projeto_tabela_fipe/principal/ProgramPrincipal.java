@@ -63,17 +63,13 @@ public class ProgramPrincipal {
         var anos = converteDados.obterLista(json, DadosMarcas.class);
 
         System.out.println("\nAnos do modelo escolhido:\n");
-        anos.stream()
-            .sorted(Comparator.comparing(DadosMarcas::codigo).reversed())
-            .forEach(System.out::println);
 
-        System.out.println("Digite o código do ano escolhido:");
-        String codigoAnoEscolhido = sc.nextLine();
-
-        json = consumoAPI.consultaAPI(URL_BASE + tipoVeiculo + "/marcas/" + codigo + "/modelos/"
-                + codigoDoModeloEscolhido + "/anos/" + codigoAnoEscolhido);
-
-        var veiculo = converteDados.obterDados(json, Veiculo.class);
+        for (int i = 0;i < anos.size();i++) {
+            json = consumoAPI.consultaAPI(URL_BASE + tipoVeiculo + "/marcas/" + codigo + "/modelos/"
+                    + codigoDoModeloEscolhido + "/anos/" + anos.get(i).codigo());
+            var veiculo = converteDados.obterDados(json, Veiculo.class);
+            System.out.println(veiculo);
+        }
 
         sc.close();
     }
